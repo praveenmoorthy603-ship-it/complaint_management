@@ -129,7 +129,7 @@ class ComplaintDashboardView(APIView):
 
         total=Complaint.objects.count()
         pending=Complaint.objects.filter(status="Pending").count()
-        resolved=Complaint.objects.filter(status="Resolved").count()
+        resolved=Complaint.objects.filter(status="Resolved5").count()
         in_progress=Complaint.objects.filter(status="In progress").count()
         high_priority=Complaint.objects.filter(priority="High").count()
         medium_priority=Complaint.objects.filter(priority="Medium").count()
@@ -215,6 +215,7 @@ class complaintPageView(APIView):
         complaint = Complaint.objects.all()
 
         paginator = PageNumberPagination() #I created a paginator instance
+        paginator.page_size = 5
 
         #I passed the queryset and request to paginate_queryset
         paginated_data = paginator.paginate_queryset(complaint, request) 
